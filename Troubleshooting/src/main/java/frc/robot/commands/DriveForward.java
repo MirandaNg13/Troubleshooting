@@ -33,9 +33,16 @@ public class DriveForward extends CommandBase {
     m_subsystem.DriveForward();
   }
 
+  public double Encoder() {
+    double encoder = m_subsystem.DriveEncoderPosition();
+    return encoder;
+  }
+
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_subsystem.DriveStop();
+  }
 
   // Returns true when the command should end.
   @Override

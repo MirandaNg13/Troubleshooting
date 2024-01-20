@@ -47,9 +47,9 @@ public class RobotContainer {
   public RobotContainer() {
 
   // Configure information to the SmartDashboard
-  SmartDashboard.putNumber("Odometry", m_drive.getAngle());
-  SmartDashboard.putNumber("Drive Encoder", m_drive.DriveEncoderPosition());
-  SmartDashboard.putNumber("Turn Encoder", m_drive.TurnEncoderCount());
+  //SmartDashboard.putNumber("Odometry", m_drive.getAngle());
+  //SmartDashboard.putNumber("Drive Encoder", c_driveForward.Encoder());
+  //SmartDashboard.putNumber("Turn Encoder", m_drive.TurnEncoderCount());
 
     // Configure the trigger bindings
     configureBindings();
