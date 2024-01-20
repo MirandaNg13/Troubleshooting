@@ -27,7 +27,7 @@ public class DriveUnit extends SubsystemBase {
     m_driveTS = new CANSparkMax(1, MotorType.kBrushless);
     m_driveEncoder = m_driveTS.getEncoder();
     m_turnTS = new VictorSPX(5);
-    m_turnEncoder = new Encoder(0, 1);
+    m_turnEncoder = new Encoder(6, 7);
     m_imu = new ADIS16448_IMU();
 
   }
