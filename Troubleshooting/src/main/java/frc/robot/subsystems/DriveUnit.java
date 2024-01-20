@@ -4,36 +4,31 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class Motors extends SubsystemBase {
+public class DriveUnit extends SubsystemBase {
   /** Creates a new Subsystem for troubleshooting motors. */
 
-  private final CANSparkMax m_leftfrontDrive;
-  private final CANSparkMax m_leftbackDrive;
-  private final CANSparkMax m_rightfrontDrive;
-  private final CANSparkMax m_rightbackDrive;
+  private final CANSparkMax m_driveTS;
+  private final RelativeEncoder m_driveEncoder;
+  private final VictorSPX m_turnTS;
+  private final Encoder m_turnEncoder;
+  private final ADIS16448_IMU m_imu;
 
-  private final VictorSPX m_leftfrontTurn;
-  private final VictorSPX m_leftbackTurn;
-  private final VictorSPX m_rightfrontTurn;
-  private final VictorSPX m_rightbackTurn;
-
-  public Motors() {
-    m_leftfrontDrive = new CANSparkMax(1, MotorType.kBrushless);
-    m_leftbackDrive = new CANSparkMax(2, MotorType.kBrushless);
-    m_rightfrontDrive = new CANSparkMax(3, MotorType.kBrushless);
-    m_rightbackDrive = new CANSparkMax(4, MotorType.kBrushless);
-
-    m_leftfrontTurn = new VictorSPX(5);
-    m_leftbackTurn = new VictorSPX(6);
-    m_rightfrontTurn = new VictorSPX(7);
-    m_rightbackTurn = new VictorSPX(8);
+  public DriveUnit() {
+    m_driveTS = new CANSparkMax(1, MotorType.kBrushless);
+    m_driveEncoder = m_driveTS.getEncoder();
+    m_turnTS = new VictorSPX(5);
+    m_turnEncoder = new Encoder(0, 1);
+    m_imu = new ADIS16448_IMU();
 
   }
 
@@ -57,10 +52,8 @@ public class Motors extends SubsystemBase {
    * @return
    */
   public void DriveForward() {
-    m_leftfrontDrive.set(0.25);
-    m_leftbackDrive.set(0.25);
-    m_rightfrontDrive.set(0.25);
-    m_rightbackDrive.set(0.25);
+    m_driveTS.set(0.25);
+    
   }
   
   /**
@@ -69,10 +62,22 @@ public class Motors extends SubsystemBase {
    * @return
    */
   public void TurnForward() {
-    m_leftfrontTurn.set(ControlMode.PercentOutput, 0.25);
-    m_leftbackTurn.set(ControlMode.PercentOutput, 0.25);
-    m_rightfrontTurn.set(ControlMode.PercentOutput, 0.25);
-    m_rightbackTurn.set(ControlMode.PercentOutput, 0.25);
+        m_turnTS.set(ControlMode.PercentOutput, 0.25);
+  }
+
+  public double DriveEncoderPosition() {
+    double encoderpos = m_driveEncoder.getPosition();
+    return encoderpos;
+  }
+
+  public double TurnEncoderCount() {
+    double encodercount = m_turnEncoder.get();
+    return encodercount;
+  }
+
+  public double getAngle() {
+    double angle = m_imu.getAngle();
+    return angle;
   }
 
   /**

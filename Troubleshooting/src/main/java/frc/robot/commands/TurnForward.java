@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveUnit;
 
 /** An example command that uses an example subsystem. */
-public class DriveForward extends CommandBase {
+public class TurnForward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveUnit m_subsystem;
 
@@ -17,7 +17,7 @@ public class DriveForward extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveForward(DriveUnit subsystem) {
+  public TurnForward(DriveUnit subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -30,7 +30,7 @@ public class DriveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.DriveForward();
+    m_subsystem.TurnForward();
   }
 
   // Called once the command ends or is interrupted.
